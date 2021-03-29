@@ -41,20 +41,20 @@ const Homepage = (props) => {
   }
 };
 
-export const getStaticPaths = async () => {
-  const users = await db.collection("users").get()
-  const paths = users.docs.map(user => ({
-    params: {
-      username: user.data().username
-    }
-  }));
-  return {
-    paths: paths,
-    fallback: true
-  }
-}
+// export const getStaticPaths = async () => {
+//   const users = await db.collection("users").get()
+//   const paths = users.docs.map(user => ({
+//     params: {
+//       username: user.data().username
+//     }
+//   }));
+//   return {
+//     paths: paths,
+//     fallback: true
+//   }
+// }
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const { username } = context.params;
   
   const user = await db.collection("users").doc(username).get()
@@ -68,16 +68,16 @@ export const getStaticProps = async (context) => {
 
 
   
-  if (user) {
+  if (user.exists) {
     return {
       props: {
-        user: {info: user.data(),
+        user: {info: user.data() || null,
           links: links}
       }
     }
   } else {
     return {
-      props: {}
+      notFound:true
     }
   }
 }

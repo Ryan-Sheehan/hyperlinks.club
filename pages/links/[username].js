@@ -17,7 +17,7 @@ const Homepage = (props) => {
 
   
 
-  console.log(props)
+ 
   const { user } = props;
   const username = user.info.username;
   const [adding, setAdding] = useState(false);
@@ -64,32 +64,32 @@ const Homepage = (props) => {
   }
 };
 
-export const getStaticPaths = async () => {
-  const users = await db.collection("users").get()
-  //users.docs.map(user => console.log(user.data()));
-  const paths = users.docs.map(user => ({
-    params: {
-      username: user.data().username
-    }
-  }));
-  return {
-    paths: paths,
-    fallback: false
-  }
-}
+// export const getStaticPaths = async () => {
+//   const users = await db.collection("users").get()
+//   //users.docs.map(user => console.log(user.data()));
+//   const paths = users.docs.map(user => ({
+//     params: {
+//       username: user.data().username
+//     }
+//   }));
+//   return {
+//     paths: paths,
+//     fallback: false
+//   }
+// }
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const {username} = context.params;
   
   
   const user = await db.collection("users").doc(username).get()
   const userLinks = await db.collection("users").doc(username).collection('links').get()
   console.log('-----')
-  console.log(user.exists)
+  console.log(user.data())
   console.log('-----')
 
 
-  
+
   const links = []
   userLinks.forEach((item) => {
     
@@ -98,24 +98,24 @@ export const getStaticProps = async (context) => {
 
 
   
-  if (user.exists) {
+  if(user.exists) {
     return {
       props: {
         user: {
           
           links: links,
-          info: user.data(),
+          info: user.data() || null,
           revalidate: 5
         }
       }
     }
-  } 
-
-  else {
-    return {
-      props: {}
-    }
   }
+    return {notFound:true}
+ 
+
+
 }
 
-export default withAuthUser()(Homepage);
+export default withAuthUser({
+  whenUnauthed: AuthAction.REDIRECT_TO_APP,
+})(Homepage)
