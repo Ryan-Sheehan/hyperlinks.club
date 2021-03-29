@@ -50,7 +50,7 @@ function Index({username}) {
       {AuthUser.email && <p>Your email is {AuthUser.email}</p>}
       {AuthUser.email && <p>Your username is {username}</p>}
       {AuthUser.email && <SignOutButton onClick={AuthUser.signOut}/>}
-      {!AuthUser.email && <Link href='/login'><LogInButton><a>Log in</a></LoginButton></Link>}
+      {!AuthUser.email && <Link href='/login'><LogInButton><a>Log in</a></LogInButton></Link>}
       
 
       
