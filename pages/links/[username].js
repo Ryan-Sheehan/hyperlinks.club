@@ -18,6 +18,7 @@ const Homepage = (props) => {
   if (props.user === undefined) {
     return <Error statusCode={404} />
   }
+
   console.log(props)
   const { user } = props;
   const username = user.info.username;
@@ -74,8 +75,7 @@ export const getStaticPaths = async () => {
     }
   }));
   return {
-    paths,
-    fallback: true
+    paths
   }
 }
 
