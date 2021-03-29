@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
-import dashify from 'dashify';
 import axios from 'axios';
 import FormLayout from '../../../components/FormLayout';
 import RedButton from '../../../components/hyperlink/RedButton';
@@ -38,7 +37,7 @@ const EditUser = () => {
     const { title, body } = content;
     console.log(id, title, body);
     await axios.put(`/api/user/${id}`, {
-      slug: dashify(title),
+      
       title,
       body,
     });
