@@ -14,7 +14,7 @@ body {
   min-height: 100%;
   margin: 0;
   line-height: 1.65;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: TimesNow;
   font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -24,4 +24,76 @@ body {
 html,
 body {
   background: #fff;
+}
+h1 {
+  font-size: 5.2rem;
+}
+a {
+  font-size: 2.4rem;
+}
+table {
+  width:100%;
+  margin-top: 0.625rem;
+}
+table,
+td {
+    border: 1px solid #333;
+
+}
+tr {
+  display: flex;
+  justify-content:center;
+  padding: 0 0.625rem;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+tbody {
+  padding-top: 1.25rem;
+}
+.top-row {
+  margin-top: 0.625rem;
+}
+.bottom-row {
+  margin-bottom: 0.625rem;
+}
+li {
+  word-break: break-word;
+  display: list-item;
+}
+.text-link {
+  color: white;
+  font-size: 1.2rem;
+  margin-top: 1.25rem;
+}
+.home-navigation {
+  padding: 0 3rem;
+  font-size: 1.6rem;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  flex-directIOn:column;
+  max-width: 300px;
+}
+label {
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-family: Arial;
+  margin-right: 1.25rem;
+}
+input {
+  border: 1px solid black;
+  font-family: Arial;
+  font-size: 1.4rem;
+  border-radius: 4px;
+  padding: 0.3125rem 0.625rem;
+}
+button {
+  margin-top: 1.25rem;
+  font-size: 1.4rem;
+  padding: 0.3125rem 0.625rem;
 }
