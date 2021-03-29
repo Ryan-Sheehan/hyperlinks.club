@@ -1,4 +1,4 @@
-const LoginButton = ({onClick}) => {
+const LogInButton = ({onClick}) => {
 	return (
 		<button 
 		className="delete-button" 
@@ -14,4 +14,4 @@ const LoginButton = ({onClick}) => {
 	)
 }
 
-export default LoginButton;
+export default LogInButton;

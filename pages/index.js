@@ -6,7 +6,7 @@ import {
 } from 'next-firebase-auth'
 import db from '../utils/db';
 import Page from '../components/landing/page';
-import LoginButton from '../components/LoginButton';
+import LogInButton from '../components/LogInButton';
 import SignOutButton from '../components/SignOutButton';
 import Link from 'next/link';
 
@@ -50,7 +50,7 @@ function Index({username}) {
       {AuthUser.email && <p>Your email is {AuthUser.email}</p>}
       {AuthUser.email && <p>Your username is {username}</p>}
       {AuthUser.email && <SignOutButton onClick={AuthUser.signOut}/>}
-      {!AuthUser.email && <Link href='/login'><LoginButton><a>Log in</a></LoginButton></Link>}
+      {!AuthUser.email && <Link href='/login'><LogInButton><a>Log in</a></LoginButton></Link>}
       
 
       
