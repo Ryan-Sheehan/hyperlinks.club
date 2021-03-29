@@ -15,9 +15,7 @@ import Link from 'next/link';
 
 const Homepage = (props) => {
 
-  if (props.user === undefined) {
-    return <Error statusCode={404} />
-  }
+  
 
   console.log(props)
   const { user } = props;
@@ -75,7 +73,7 @@ export const getStaticPaths = async () => {
     }
   }));
   return {
-    paths: [],
+    paths: paths,
     fallback: false
   }
 }
@@ -86,7 +84,9 @@ export const getStaticProps = async (context) => {
   
   const user = await db.collection("users").doc(username).get()
   const userLinks = await db.collection("users").doc(username).collection('links').get()
-  
+  console.log('-----')
+  console.log(user.exists)
+  console.log('-----')
 
 
   
@@ -105,6 +105,7 @@ export const getStaticProps = async (context) => {
           
           links: links,
           info: user.data(),
+          revalidate: 5
         }
       }
     }
