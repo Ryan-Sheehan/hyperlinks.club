@@ -7,9 +7,6 @@
     "build": "next build",
     "start": "next start"
   },
-  "engines": {
-    "node": "14.8.0"
-  },
   "prettier": {
     "trailingComma": "es5",
     "singleQuote": true,
