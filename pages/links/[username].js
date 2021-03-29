@@ -3,6 +3,7 @@ import db from '../../utils/db';
 import Layout from '../../components/Layout';
 import AddLink from '../../components/AddLink'
 import RedButton from '../../components/RedButton'
+import Error from 'next/error'
 import {
   useAuthUser,
   withAuthUser,
@@ -13,6 +14,11 @@ import {useState} from 'react';
 import Link from 'next/link';
 
 const Homepage = (props) => {
+
+  if (props.user === undefined) {
+    return <Error statusCode={404} />
+  }
+  console.log(props)
   const { user } = props;
   const username = user.info.username;
   const [adding, setAdding] = useState(false);
@@ -31,7 +37,7 @@ const Homepage = (props) => {
     )
   } else {
     if (user) {
-      console.log(user)
+
       return (
         <Layout>
           <Link href="/"><a>Go back home</a></Link>
@@ -61,6 +67,7 @@ const Homepage = (props) => {
 
 export const getStaticPaths = async () => {
   const users = await db.collection("users").get()
+  //users.docs.map(user => console.log(user.data()));
   const paths = users.docs.map(user => ({
     params: {
       username: user.data().username
@@ -79,6 +86,9 @@ export const getStaticProps = async (context) => {
   const user = await db.collection("users").doc(username).get()
   const userLinks = await db.collection("users").doc(username).collection('links').get()
   
+
+
+  
   const links = []
   userLinks.forEach((item) => {
     
@@ -87,14 +97,19 @@ export const getStaticProps = async (context) => {
 
 
   
-  if (user) {
+  if (user.exists) {
     return {
       props: {
-        user: {info: user.data(),
-          links: links}
+        user: {
+          
+          links: links,
+          info: user.data(),
+        }
       }
     }
-  } else {
+  } 
+
+  else {
     return {
       props: {}
     }

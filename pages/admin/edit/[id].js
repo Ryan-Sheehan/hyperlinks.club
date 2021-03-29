@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import axios from 'axios';
 import FormLayout from '../../../components/FormLayout';
-import RedButton from '../../../components/hyperlink/RedButton';
+import RedButton from '../../../components/RedButton';
 
 const EditUser = () => {
   const router = useRouter()
